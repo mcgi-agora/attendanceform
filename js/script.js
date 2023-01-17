@@ -6,7 +6,7 @@ const loadMiembros = function() {
         window.miembros = myObj;
         let text = "<option id='select-a-member' value=''>- Select Name -</option>";
         for (let x in myObj) {
-            text += "<option value='" + myObj[x].id + "' data-churchid='" + myObj[x].churchid + "' data-subgroup='" + myObj[x].subgroup + "' data-kktk='" + myObj[x].kktk + "'>" + myObj[x].fullname + "</option>";
+            text += "<option value='" + myObj[x].id + "' data-churchid='" + myObj[x].churchid + "' data-subgroup='" + myObj[x].subgroup + "' data-youth='" + myObj[x].youth + "'>" + myObj[x].fullname + "</option>";
         }
         document.getElementById("miembros").innerHTML = text;
     }
@@ -22,7 +22,7 @@ function loadSubgroupMembers(id) {
     var myObj = window.miembros;
     for (let x in myObj) {
         if (myObj[x].subgroup == id) {
-            text += "<option value='" + myObj[x].id + "' data-churchid='" + myObj[x].churchid + "' data-subgroup='" + myObj[x].subgroup + "' data-kktk='" + myObj[x].kktk + "'>" + myObj[x].fullname + "</option>";
+            text += "<option value='" + myObj[x].id + "' data-churchid='" + myObj[x].churchid + "' data-subgroup='" + myObj[x].subgroup + "' data-youth='" + myObj[x].youth + "'>" + myObj[x].fullname + "</option>";
         }
     }
     document.getElementById("miembros").innerHTML = text;
@@ -91,7 +91,7 @@ const saveAttendanceRecords = function() {
     var date_attended = $('#date-attended').val();
     var time_attended = $('#time-attended').val();
     var platform = $('#platform').val();
-    var kktk = $('#miembros option:selected').data('kktk');
+    var youth = $('#miembros option:selected').data('youth');
 
     var data = new FormData();
     data.append('id', member_id);
@@ -102,7 +102,7 @@ const saveAttendanceRecords = function() {
     data.append('date_attended', date_attended);
     data.append('time_attended', time_attended);
     data.append('platform', platform);
-    data.append('kktk', kktk);
+    data.append('youth', youth);
 
     fetch(googleMacroURL, {
         method: 'POST',
